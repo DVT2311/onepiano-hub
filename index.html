@@ -316,6 +316,48 @@ svg text{fill:var(--ink-2);font-family:var(--font-sans);font-size:11px}
 .addrow{display:flex;gap:8px;margin-top:14px}
 .addrow input{flex:1;min-width:0;border:1px solid var(--border);border-radius:var(--r-pill);padding:7px 14px;background:var(--surface);font-size:13px}
 
+/* branches */
+.branch-pick{padding:5px 8px 5px 12px;border-color:var(--border);cursor:pointer}
+.branch-pick select{font-weight:600;font-size:13px;cursor:pointer;padding-right:4px}
+.branch-pick svg{stroke:var(--orange-ink)}
+.branch-pick.on{border-color:var(--orange);background:var(--orange-tint)}
+.bhead{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.6fr) auto;gap:24px;align-items:center;background:var(--orange);color:#fff;border-radius:var(--r-md);padding:22px 24px}
+.bhead .eyebrow{font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.9;font-weight:600}
+.bhead h2{font-family:var(--font-display);font-weight:600;font-size:28px;line-height:1.15;margin:4px 0 6px;text-wrap:balance}
+.bhead p{margin:0;font-size:13px;opacity:.95}
+.bhead-m{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.bhead-m span{display:block;font-size:12px;opacity:.9}
+.bhead-m b{font-weight:600;font-size:14px}
+.bhead-btn{background:#fff;border-color:#fff;color:var(--orange-btn)}
+.bhead-btn:hover{background:#fff3e7}
+.btable tbody tr td{background:var(--surface)}
+.bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;align-items:start}
+.bcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:20px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.bcard.sel{border-color:var(--orange);box-shadow:inset 0 0 0 1px var(--orange)}
+.bcard-h{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.bcard-h h3{margin:0;font-size:18px;font-weight:600}
+.bcard-h p{margin:2px 0 0;font-size:12px}
+.bkpi{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;background:var(--surface-2);border-radius:var(--r-sm);padding:12px}
+.bkpi span{display:block;font-size:11px;color:var(--ink-2)}
+.bkpi b{font-family:var(--font-display);font-weight:600;font-size:17px}
+.li-btn{background:none;border:0;border-bottom:1px solid var(--line);width:100%;cursor:pointer;font:inherit;color:inherit}
+.li-btn:hover b{color:var(--orange-ink)}
+.bcard-f{display:flex;gap:10px;flex-wrap:wrap}
+.bgrid{grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr))}
+@media (max-width:1280px){.bhead{grid-template-columns:minmax(0,1fr) auto}.bhead-m{grid-column:1/-1;grid-row:2}}
+@media (max-width:760px){
+  .top-right{width:100%}
+  .branch-pick{flex:1 1 100%;order:-1}
+  .branch-pick select{width:100%}
+  .bhead{grid-template-columns:minmax(0,1fr);padding:18px;gap:16px}
+  .bhead-m{grid-row:auto;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .bhead h2{font-size:22px}
+  .bhead-btn{justify-content:center}
+  .bkpi{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .bcard{padding:16px}
+  .bcard-f .btn{flex:1;justify-content:center}
+}
+
 /* responsive pieces shared by breakpoints */
 .mbar,.nav-scrim{display:none}
 .mcards{display:none}
@@ -438,6 +480,7 @@ svg text{fill:var(--ink-2);font-family:var(--font-sans);font-size:11px}
     <header class="top">
       <div><div class="crumb" id="crumb"></div><h1 id="title"></h1></div>
       <div class="top-right">
+        <label class="field branch-pick"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><select id="branchSel" aria-label="Chọn chi nhánh"></select></label>
         <span class="chip-date">Hôm nay <b class="num" id="today"></b></span>
         <span class="user"><span class="av av-1">QT</span><span>Quản trị viên</span></span>
       </div>
@@ -479,6 +522,7 @@ const ICON={
  profile:'<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="11" r="2.5"/><path d="M5.5 17c.6-1.8 1.9-2.8 3.5-2.8s2.9 1 3.5 2.8M15 10h3M15 13.5h3"/></svg>',
  marketing:'<svg viewBox="0 0 24 24"><rect x="3" y="3" width="5" height="18" rx="1.5"/><rect x="9.5" y="3" width="5" height="12" rx="1.5"/><rect x="16" y="3" width="5" height="8" rx="1.5"/></svg>',
  setup:'<svg viewBox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>',
+ branch:'<svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l7-5 7 5v12"/><path d="M9.5 21v-5h5v5M9 11.5h.01M15 11.5h.01"/></svg>',
  search:'<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg>',
  plus:'<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>',
  x:'<svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>',
@@ -529,8 +573,25 @@ const CLASSES=[
  {id:'DEMHAT-11',name:'Piano 1-1 – Đệm hát',type:'Lớp 1-1',teacher:'Nguyễn Thị Thảo',ta:'',mode:'Online',branch:'Khánh Hội',fee:6500000,disc:0,book:'Pop Piano Chords – Đệm hát',sched:'s2',start:'01/09/2026',cap:4,total:24,n:4},
  {id:'ABRSM2-K06',name:'Luyện thi ABRSM Grade 2 – K06',type:'Luyện thi ABRSM',teacher:'Trịnh Đăng Quyết',ta:'Quỳnh Nhung',mode:'Offline',branch:'Gò Vấp',fee:5600000,disc:0,book:'ABRSM Piano Exam Pieces – Grade 2',sched:'s7',start:'12/09/2026',cap:8,total:32,n:7},
  {id:'LD997-K03',name:'Lớp luyện đàn 997 – K03',type:'Lớp luyện đàn 997',teacher:'Nguyễn Thị Thảo',ta:'Hoàng Việt Hồng',mode:'Offline',branch:'An Lạc',fee:1300000,disc:0,book:'Méthode Rose',sched:'s4',start:'05/10/2026',cap:12,total:24,n:10},
- {id:'NHOM-K24',name:'Piano Nhóm Cơ bản – K24',type:'Lớp Nhóm',teacher:'Vũ Việt Hương',ta:'',mode:'Offline',branch:'Thạnh Mỹ Tây',fee:3900000,disc:14,book:BOOK1,sched:'s10',start:'07/11/2026',cap:10,total:32,n:5}
+ {id:'NHOM-K24',name:'Piano Nhóm Cơ bản – K24',type:'Lớp Nhóm',teacher:'Vũ Việt Hương',ta:'',mode:'Offline',branch:'Thạnh Mỹ Tây',fee:3900000,disc:14,book:BOOK1,sched:'s10',start:'07/11/2026',cap:10,total:32,n:5},
+ {id:'NHOM-K23',name:'Piano Nhóm Cơ bản – K23',type:'Lớp Nhóm',teacher:'Trịnh Đăng Quyết',ta:'Lan Trang',mode:'Offline',branch:'Phú Nhuận',fee:3900000,disc:0,book:BOOK1,sched:'s6',start:'15/08/2026',cap:10,total:32,n:9},
+ {id:'LD997-K02',name:'Lớp luyện đàn 997 – K02',type:'Lớp luyện đàn 997',teacher:'Nguyễn Thị Thảo',ta:'Quỳnh Nhung',mode:'Offline',branch:'Tân Bình',fee:1300000,disc:0,book:'Méthode Rose',sched:'s9',start:'05/09/2026',cap:12,total:24,n:11},
+ {id:'ABRSM1-K07',name:'Luyện thi ABRSM Grade 1 – K07',type:'Luyện thi ABRSM',teacher:'Trịnh Đăng Quyết',ta:'',mode:'Offline',branch:'Bàn Cờ',fee:5200000,disc:5,book:'ABRSM Piano Exam Pieces – Grade 1',sched:'s3',start:'02/09/2026',cap:8,total:32,n:6},
+ {id:'CODIEN-11',name:'Piano 1-1 – Cổ điển',type:'Lớp 1-1',teacher:'Vũ Việt Hương',ta:'',mode:'Offline',branch:'Gò Vấp',fee:6500000,disc:0,book:"Alfred's Adult All-in-One 2",sched:'s8',start:'22/08/2026',cap:4,total:24,n:3},
+ {id:'NHOM-K20',name:'Piano Nhóm Cơ bản – K20',type:'Lớp Nhóm',teacher:'Nguyễn Thị Thảo',ta:'Hoàng Việt Hồng',mode:'Offline',branch:'Khánh Hội',fee:3900000,disc:0,book:BOOK1,sched:'s2',start:'06/01/2026',cap:10,total:32,n:8},
+ {id:'LD997-K04',name:'Lớp luyện đàn 997 – K04',type:'Lớp luyện đàn 997',teacher:'Nguyễn Thị Thảo',ta:'Lan Trang',mode:'Offline',branch:'Thạnh Mỹ Tây',fee:1300000,disc:10,book:'Méthode Rose',sched:'s9',start:'26/09/2026',cap:12,total:24,n:7},
+ {id:'NHOM-K25',name:'Piano Nhóm Cơ bản – K25',type:'Lớp Nhóm',teacher:'Trịnh Đăng Quyết',ta:'',mode:'Offline',branch:'An Lạc',fee:3900000,disc:14,book:BOOK1,sched:'s6',start:'14/11/2026',cap:10,total:32,n:3}
 ];
+const BRANCHES=[
+ {name:'Phú Nhuận',addr:'270 Huỳnh Văn Bánh, Phường Phú Nhuận',since:'05/2023',mgr:'Lâm Thảo Vy',rooms:6},
+ {name:'An Lạc',addr:'304-306 Đường số 1, Khu Tên Lửa, Phường An Lạc',since:'11/2023',mgr:'Phan Đức Trí',rooms:5},
+ {name:'Tân Bình',addr:'109-111 Bàu Cát, Phường Tân Bình',since:'05/2024',mgr:'Cao Ngọc Hân',rooms:6},
+ {name:'Bàn Cờ',addr:'449 Võ Văn Tần, Phường Bàn Cờ',since:'06/2024',mgr:'Vương Minh Khôi',rooms:5},
+ {name:'Khánh Hội',addr:'287-289 Hoàng Diệu, Phường Khánh Hội',since:'09/2024',mgr:'Tạ Bảo Ngọc',rooms:4},
+ {name:'Gò Vấp',addr:'342 Quang Trung, Phường Gò Vấp',since:'10/2025',mgr:'Lương Gia Bảo',rooms:5},
+ {name:'Thạnh Mỹ Tây',addr:'300B Xô Viết Nghệ Tĩnh, Phường Thạnh Mỹ Tây',since:'04/2026',mgr:'Mạc Thu Trang',rooms:4}
+];
+const BR=Object.fromEntries(BRANCHES.map(b=>[b.name,b]));
 CLASSES.forEach(c=>{
   c.startD=D(c.start);c.final=Math.round(c.fee*(1-c.disc/100)/1000)*1000;
   const days=SCH[c.sched].days,out=[],dt=new Date(c.startD);
@@ -562,7 +623,7 @@ function mkStudent(cls,status){
   if(cls){const held=status==='hoc-thu'?Math.min(cls.held,3):cls.held;const off=cls.held-held;
     for(let i=0;i<cls.held;i++){if(i<off)att.push(null);else if(status==='bao-luu'&&i>cls.held*.55)att.push(false);else att.push(rnd()<.9)}}
   const s={id,name,gender:g,birth,status,cls:cls?cls.id:'',reg,phone,email,pay,method,att,
-    branch:cls?cls.branch:pick(['Phú Nhuận','Tân Bình','Bàn Cờ','Gò Vấp']),note:''};
+    branch:cls?cls.branch:pick(BRANCHES).name,note:''};
   STUDENTS.push(s);return s;
 }
 CLASSES.forEach(c=>{for(let j=0;j<c.n;j++){let st='dang-hoc';
@@ -570,7 +631,7 @@ CLASSES.forEach(c=>{for(let j=0;j<c.n;j++){let st='dang-hoc';
   else if(c.status==='soon')st='cho-xep';
   else{if(j===c.n-1&&c.n>4)st='hoc-thu';else if(j===c.n-2&&c.n>5)st='bao-luu';else if(j===1&&(c.id==='NHOM-K22'||c.id==='LD997-K03'))st='quay-lai';}
   mkStudent(c,st)}});
-for(let i=0;i<4;i++)mkStudent(null,'cho-xep');
+for(let i=0;i<6;i++)mkStudent(null,'cho-xep');
 const STU=Object.fromEntries(STUDENTS.map(s=>[s.id,s]));
 const classStudents=id=>STUDENTS.filter(s=>s.cls===id);
 const activeIn=c=>classStudents(c.id).filter(s=>s.status!=='ket-thuc').length;
@@ -617,6 +678,7 @@ const saveTasks=()=>store.set(KEY,TASKS);
 /* ---------- state & router ---------- */
 const VIEWS=[
  {k:'dashboard',l:'Tổng quan',i:'dash',g:'Vận hành'},
+ {k:'branches',l:'Chi nhánh',i:'branch',g:'Vận hành'},
  {k:'classes',l:'Lớp học',i:'classes',g:'Vận hành'},
  {k:'students',l:'Học viên',i:'students',g:'Vận hành'},
  {k:'attendance',l:'Điểm danh',i:'attendance',g:'Vận hành'},
@@ -625,11 +687,33 @@ const VIEWS=[
  {k:'marketing',l:'Công việc Marketing',i:'marketing',g:'Đội nhóm'},
  {k:'setup',l:'Thiết lập',i:'setup',g:'Hệ thống'}
 ];
-const S={view:'dashboard',clsFilter:'all',clsQ:'',stuFilter:'all',stuQ:'',attCls:'NHOM-K22',rosterCls:'NHOM-K22',rosterSt:'all',profile:'',mktQ:'',mktWho:[],mktEpic:'all'};
+const S={view:'dashboard',branch:'all',clsFilter:'all',clsQ:'',stuFilter:'all',stuQ:'',attCls:'NHOM-K22',rosterCls:'NHOM-K22',rosterSt:'all',profile:'',mktQ:'',mktWho:[],mktEpic:'all'};
 const $=s=>document.querySelector(s);
 const view=$('#view');
 $('#today').textContent=fmt(TODAY);
 S.profile=classStudents('NHOM-K22')[0].id;
+{const b=store.get('op-admin-branch');if(b&&BR[b])S.branch=b}
+const inB=x=>S.branch==='all'||x.branch===S.branch;
+const CLS=()=>CLASSES.filter(inB),STUS=()=>STUDENTS.filter(inB);
+const bName=()=>S.branch==='all'?'Tất cả chi nhánh':'CN '+S.branch;
+function syncSel(){
+  const cs=CLS();
+  const att=cs.filter(c=>c.status!=='soon');
+  if(!att.some(c=>c.id===S.attCls))S.attCls=(att.find(c=>c.status==='open')||att[0]||{}).id||'';
+  if(!cs.some(c=>c.id===S.rosterCls))S.rosterCls=(cs.find(c=>c.status==='open')||cs[0]||{}).id||'';
+  const st=STUS();if(!st.some(x=>x.id===S.profile))S.profile=(st[0]||{}).id||'';
+}
+function setBranch(b){S.branch=BR[b]?b:'all';store.set('op-admin-branch',S.branch);syncSel()}
+function bstats(name){
+  const cs=CLASSES.filter(c=>c.branch===name),st=STUDENTS.filter(s=>s.branch===name);
+  const learning=st.filter(s=>['dang-hoc','hoc-thu','quay-lai'].includes(s.status));
+  const open=cs.filter(c=>c.status==='open');
+  const cap=open.reduce((a,c)=>a+c.cap,0),act=open.reduce((a,c)=>a+activeIn(c),0);
+  const rates=learning.map(attRate).filter(r=>r!=null);
+  return {cs,st,learning,open,soon:cs.filter(c=>c.status==='soon'),fill:cap?act/cap:0,rev:st.reduce((a,s)=>a+paidOf(s),0),
+    att:rates.length?rates.reduce((a,b)=>a+b,0)/rates.length:null,debt:st.filter(s=>s.pay==='Còn nợ').length};
+}
+syncSel();
 
 function nav(){
   let g='',h='';
@@ -641,7 +725,9 @@ function nav(){
 function go(k,opts){if(!VIEWS.some(v=>v.k===k))k='dashboard';S.view=k;Object.assign(S,opts||{});render();window.scrollTo(0,0);try{if(location.hash!=='#'+k)history.replaceState(null,'','#'+k)}catch(e){}}
 function render(){
   nav();const v=VIEWS.find(x=>x.k===S.view);
-  $('#title').textContent=v.l;$('#crumb').textContent='One Piano · '+v.g;
+  $('#title').textContent=v.l;$('#crumb').textContent='One Piano · '+(v.k==='marketing'||v.k==='setup'?'Toàn hệ thống':bName());
+  $('#branchSel').innerHTML='<option value="all">Tất cả chi nhánh</option>'+BRANCHES.map(b=>`<option value="${esc(b.name)}" ${S.branch===b.name?'selected':''}>CN ${esc(b.name)}</option>`).join('');
+  $('#branchSel').closest('.branch-pick').classList.toggle('on',S.branch!=='all');
   document.title='One Piano Admin';
   view.innerHTML=R[S.view]();
   if(S.view==='marketing')bindBoard();
@@ -652,9 +738,11 @@ menuBtn.addEventListener('click',()=>setNav(!appEl.classList.contains('nav-open'
 document.getElementById('navscrim').addEventListener('click',()=>setNav(false));
 document.addEventListener('keydown',e=>{if(e.key==='Escape')setNav(false)});
 let wasNarrow=narrow(),rz;window.addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{if(narrow()!==wasNarrow){wasNarrow=narrow();const y=window.scrollY;render();window.scrollTo(0,y)}if(window.innerWidth>760)setNav(false)},150)});
+document.getElementById('branchSel').addEventListener('change',e=>{setBranch(e.target.value);render()});
 document.addEventListener('click',e=>{
   const a=e.target.closest('[data-go]');if(a)setNav(false);
-  if(a){e.preventDefault();const o={};if(a.dataset.cls){o.rosterCls=a.dataset.cls;o.attCls=a.dataset.cls}if(a.dataset.stu)o.profile=a.dataset.stu;go(a.dataset.go,o);return}
+  if(a){e.preventDefault();const o={};if(a.dataset.cls){o.rosterCls=a.dataset.cls;o.attCls=a.dataset.cls}if(a.dataset.stu)o.profile=a.dataset.stu;if(a.dataset.branch)setBranch(a.dataset.branch);go(a.dataset.go,o);return}
+  const b=e.target.closest('[data-branch]');if(b){setBranch(b.dataset.branch);render();window.scrollTo(0,0);toast(S.branch==='all'?'Đang xem tất cả chi nhánh':'Đang xem CN '+S.branch)}
 });
 
 /* ---------- charts ---------- */
@@ -688,6 +776,7 @@ function burndown(){
 /* ---------- views ---------- */
 const R={};
 R.dashboard=()=>{
+  const CLASSES=CLS(),STUDENTS=STUS();
   const open=CLASSES.filter(c=>c.status==='open'),soon=CLASSES.filter(c=>c.status==='soon'),ended=CLASSES.filter(c=>c.status==='ended');
   const rev=STUDENTS.reduce((a,s)=>a+paidOf(s),0);
   const learning=STUDENTS.filter(s=>['dang-hoc','hoc-thu','quay-lai'].includes(s.status));
@@ -698,28 +787,58 @@ R.dashboard=()=>{
   const months=['T1','T2','T3','T4','T5','T6','T7','T8','T9','T10'];
   const regs=months.map((_,i)=>STUDENTS.filter(s=>s.reg.getFullYear()===2026&&s.reg.getMonth()===i).length);
   const sprintT=TASKS.filter(t=>t.status!=='backlog'),tot=sprintT.reduce((a,t)=>a+t.pts,0),dn=sprintT.filter(t=>t.status==='done').reduce((a,t)=>a+t.pts,0);
-  return `
+  const bhead=S.branch==='all'?'':branchHead(S.branch);
+  const compare=S.branch==='all'?branchCompare():'';
+  return `${bhead}
   <div class="stats">
     <div class="stat hero"><span class="k">Học viên đang theo học</span><span class="v">${learning.length}</span><span class="s">trên tổng ${STUDENTS.length} hồ sơ</span></div>
     <div class="stat"><span class="k">Lớp học</span><span class="v num">${CLASSES.length}</span><span class="s">${open.length} đang mở · ${soon.length} sắp mở · ${ended.length} đã kết thúc</span></div>
     <div class="stat"><span class="k">Học phí đã thu</span><span class="v num">${(rev/1e6).toLocaleString('vi-VN',{maximumFractionDigits:1})} tr</span><span class="s">${money(rev)}</span></div>
     <div class="stat"><span class="k">Chuyên cần trung bình</span><span class="v num">${avgAtt}%</span><span class="s">các lớp đang mở</span></div>
-    <div class="stat"><span class="k">Đội ngũ giảng dạy</span><span class="v num">${SETUP.teachers.items.length} + ${SETUP.tas.items.length}</span><span class="s">giáo viên + trợ giảng</span></div>
+    <div class="stat"><span class="k">Đội ngũ giảng dạy</span><span class="v num">${new Set(CLASSES.filter(c=>c.status!=='ended').map(c=>c.teacher)).size} + ${new Set(CLASSES.filter(c=>c.status!=='ended'&&c.ta).map(c=>c.ta)).size}</span><span class="s">giáo viên + trợ giảng</span></div>
   </div>
   <div class="g2">
     <div class="card"><div class="card-h"><h2>Học viên theo <em>tình trạng</em></h2><div class="legend"><span><i style="background:var(--chart-a)"></i>Nam</span><span><i style="background:var(--chart-b)"></i>Nữ</span></div></div><div class="hbars">${rows}</div></div>
     <div class="card"><div class="card-h"><h2>Đăng ký mới theo tháng</h2><p>Năm 2026</p></div>${vbars(months,regs,{hi:9})}</div>
-  </div>
+  </div>${compare}
   <div class="g2">
     <div class="card"><div class="card-h"><h2>Lớp đang mở</h2><button class="link" data-go="classes">Xem tất cả lớp</button></div>
-      <div class="list">${open.concat(soon).map(c=>{const n=activeIn(c);return `<div class="li"><div style="min-width:0"><b>${esc(c.name)}</b><div class="muted" style="font-size:12px">${esc(c.teacher)} · ${esc(SCH[c.sched].label)} · CN ${esc(c.branch)}</div></div><div class="fill" style="min-width:150px"><div class="bar"><span style="width:${n/c.cap*100}%"></span></div><span class="num muted">${n}/${c.cap}</span></div></div>`}).join('')}</div></div>
+      <div class="list">${open.concat(soon).map(c=>{const n=activeIn(c);return `<div class="li"><div style="min-width:0"><b>${esc(c.name)}</b><div class="muted" style="font-size:12px">${esc(c.teacher)} · ${esc(SCH[c.sched].label)} · ${S.branch==='all'?'CN '+esc(c.branch):esc(c.mode)}</div></div><div class="fill" style="min-width:150px"><div class="bar"><span style="width:${n/c.cap*100}%"></span></div><span class="num muted">${n}/${c.cap}</span></div></div>`}).join('')}</div></div>
     <div class="card"><div class="card-h"><h2>Marketing · ${SPRINT.name}</h2><button class="link" data-go="marketing">Mở bảng công việc</button></div>
       <div class="progress"><div class="lbl"><span>${dn}/${tot} điểm hoàn thành</span><span class="num">${Math.round(dn/tot*100)}%</span></div><div class="bar"><span style="width:${dn/tot*100}%"></span></div></div>
       <div class="list" style="margin-top:8px">${TASKS.filter(t=>t.status==='doing'||t.status==='review').slice(0,5).map(t=>`<div class="li"><div style="min-width:0"><b style="white-space:normal">${esc(t.title)}</b><div class="muted" style="font-size:12px">${t.key} · ${esc(t.who)}</div></div>${t.status==='doing'?pill('try','Đang làm'):pill('info','Đang duyệt')}</div>`).join('')}</div></div>
   </div>`;
 };
 
+function branchHead(name){const b=BR[name],x=bstats(name);
+  return `<div class="bhead"><div class="bhead-l"><span class="eyebrow">Chi nhánh</span><h2>${esc(b.name)}</h2><p>${esc(b.addr)}, TP.HCM</p></div>
+  <div class="bhead-m"><div><span>Quản lý</span><b>${esc(b.mgr)}</b></div><div><span>Hoạt động từ</span><b class="num">${b.since}</b></div><div><span>Phòng học</span><b class="num">${b.rooms}</b></div><div><span>Hotline</span><b class="num">1800 646 821</b></div></div>
+  <button class="btn bhead-btn" data-branch="all">Xem tất cả chi nhánh</button></div>`}
+function branchCompare(){
+  const rows=BRANCHES.map(b=>({b,x:bstats(b.name)}));const maxRev=Math.max(...rows.map(r=>r.x.rev),1);const totRev=rows.reduce((a,r)=>a+r.x.rev,0)||1;
+  const best=rows.reduce((m,r)=>r.x.rev>m.x.rev?r:m,rows[0]);
+  return `<div class="card"><div class="card-h"><h2>Hiệu quả theo <em>chi nhánh</em></h2><p>Bấm vào một chi nhánh để xem riêng</p></div>
+  <div class="tw desk" style="border:0;border-radius:0"><table class="btable"><thead><tr><th>Chi nhánh</th><th class="r">Lớp đang mở</th><th class="r">Học viên đang học</th><th>Lấp đầy lớp</th><th class="r">Chuyên cần</th><th class="r">Còn nợ phí</th><th>Học phí đã thu</th></tr></thead>
+  <tbody>${rows.map(({b,x})=>`<tr data-branch="${esc(b.name)}"><td><div class="who"><div><b>${esc(b.name)}${b===best.b?' <span class="tag" style="margin-left:6px">Dẫn đầu</span>':''}</b><small>${esc(b.mgr)} · ${b.rooms} phòng</small></div></div></td>
+    <td class="r num">${x.open.length}${x.soon.length?` <span class="muted">+${x.soon.length}</span>`:''}</td><td class="r num"><b>${x.learning.length}</b></td>
+    <td><div class="fill"><div class="bar"><span style="width:${x.fill*100}%"></span></div><span class="num">${Math.round(x.fill*100)}%</span></div></td>
+    <td class="r num">${x.att==null?'—':Math.round(x.att*100)+'%'}</td><td class="r num ${x.debt?'':'muted'}" style="${x.debt?'color:var(--bad)':''}">${x.debt}</td>
+    <td><div class="fill" style="min-width:200px"><div class="bar"><span style="width:${x.rev/maxRev*100}%;background:var(--chart-a)"></span></div><span class="num" style="min-width:64px;text-align:right">${(x.rev/1e6).toLocaleString('vi-VN',{maximumFractionDigits:1})} tr</span><span class="num muted" style="min-width:34px;text-align:right">${Math.round(x.rev/totRev*100)}%</span></div></td></tr>`).join('')}</tbody></table></div>
+  <div class="mcards">${rows.map(({b,x})=>`<button class="mc" data-branch="${esc(b.name)}"><div class="mc-h"><div class="who"><div><b>CN ${esc(b.name)}</b><small>${esc(b.mgr)}</small></div></div><b class="num">${(x.rev/1e6).toLocaleString('vi-VN',{maximumFractionDigits:1})} tr</b></div>
+    <div class="mc-g"><div><span>Lớp đang mở</span><b class="num">${x.open.length}</b></div><div><span>Học viên đang học</span><b class="num">${x.learning.length}</b></div><div><span>Lấp đầy</span><b class="num">${Math.round(x.fill*100)}%</b></div><div><span>Chuyên cần</span><b class="num">${x.att==null?'—':Math.round(x.att*100)+'%'}</b></div></div></button>`).join('')}</div></div>`;
+}
+R.branches=()=>{
+  const list=BRANCHES.filter(b=>S.branch==='all'||b.name===S.branch);
+  return `<div class="bgrid">${list.map(b=>{const x=bstats(b.name);return `<article class="bcard ${S.branch===b.name?'sel':''}">
+    <div class="bcard-h"><div><h3>CN ${esc(b.name)}</h3><p class="muted">${esc(b.addr)}</p></div>${x.open.length?pill('ok',x.open.length+' lớp đang mở'):pill('wait','Chưa có lớp mở')}</div>
+    <div class="bcard-m"><div class="who">${av(b.mgr)}<div><b>${esc(b.mgr)}</b><small>Quản lý chi nhánh · từ ${b.since}</small></div></div></div>
+    <div class="bkpi"><div><span>Học viên</span><b class="num">${x.learning.length}</b></div><div><span>Lấp đầy</span><b class="num">${Math.round(x.fill*100)}%</b></div><div><span>Chuyên cần</span><b class="num">${x.att==null?'—':Math.round(x.att*100)+'%'}</b></div><div><span>Đã thu</span><b class="num">${(x.rev/1e6).toLocaleString('vi-VN',{maximumFractionDigits:1})} tr</b></div></div>
+    <div class="list">${x.cs.map(c=>`<button class="li li-btn" data-go="roster" data-cls="${c.id}" data-branch="${esc(b.name)}"><div style="min-width:0;text-align:left"><b>${esc(c.name)}</b><div class="muted" style="font-size:12px">${esc(c.teacher)} · ${esc(SCH[c.sched].label)}</div></div>${pill(CST[c.status].c,CST[c.status].l)}</button>`).join('')||'<p class="muted">Chưa có lớp.</p>'}</div>
+    <div class="bcard-f"><button class="btn btn-primary" data-go="dashboard" data-branch="${esc(b.name)}">Xem tổng quan</button><button class="btn btn-quiet" data-go="students" data-branch="${esc(b.name)}">Học viên</button></div></article>`}).join('')}</div>
+  ${S.branch==='all'?'':'<div><button class="btn btn-quiet" data-branch="all">Xem tất cả 7 chi nhánh</button></div>'}`;
+};
 R.classes=()=>{
+  const CLASSES=CLS(),STUDENTS=STUS();
   const cnt=k=>CLASSES.filter(c=>c.status===k).length;
   let list=CLASSES.filter(c=>S.clsFilter==='all'||c.status===S.clsFilter);
   if(S.clsQ){const q=fold(S.clsQ);list=list.filter(c=>fold(c.name+' '+c.id+' '+c.teacher).includes(q))}
@@ -759,6 +878,7 @@ R.classes=()=>{
 };
 
 R.students=()=>{
+  const STUDENTS=STUS();
   let list=STUDENTS.filter(s=>S.stuFilter==='all'||s.status===S.stuFilter);
   if(S.stuQ){const q=fold(S.stuQ);list=list.filter(s=>fold(s.name+' '+s.id+' '+s.phone+' '+(s.cls?CL[s.cls].name:'')).includes(q))}
   return `
@@ -785,8 +905,10 @@ R.students=()=>{
     <div><span>Số điện thoại</span><b class="num">${s.phone}</b></div><div><span>Học phí</span><b>${esc(s.pay)}</b></div></div></button>`}).join('')||'<p class="muted">Không có học viên nào khớp bộ lọc.</p>'}</div>`;
 };
 
-const clsOptions=(sel,filter=()=>true)=>CLASSES.filter(filter).map(c=>`<option value="${c.id}" ${c.id===sel?'selected':''}>${esc(c.name)} · ${CST[c.status].l}</option>`).join('');
+const empty=m=>`<div class="card" style="text-align:center;padding:48px 20px"><p style="margin:0 0 14px" class="muted">${m}</p><button class="btn btn-quiet" data-branch="all">Xem tất cả chi nhánh</button></div>`;
+const clsOptions=(sel,filter=()=>true)=>CLS().filter(filter).map(c=>`<option value="${c.id}" ${c.id===sel?'selected':''}>${esc(c.name)} · ${CST[c.status].l}</option>`).join('');
 R.attendance=()=>{
+  if(!S.attCls)return empty('Chi nhánh này chưa có lớp đã khai giảng.');
   const c=CL[S.attCls];const list=classStudents(c.id);const show=Math.max(Math.min(c.total,c.held+4),12);
   const todayI=c.sessions.findIndex(d=>sameDay(d,TODAY));
   const heads=c.sessions.slice(0,show).map((d,i)=>`<th class="s ${i===todayI?'today':''}">${i+1}<small>${sh(d)}</small></th>`).join('');
@@ -816,6 +938,7 @@ R.attendance=()=>{
 };
 
 R.roster=()=>{
+  if(!S.rosterCls)return empty('Chi nhánh này chưa có lớp học.');
   const c=CL[S.rosterCls];let list=classStudents(c.id);
   if(S.rosterSt!=='all')list=list.filter(s=>s.status===S.rosterSt);
   const all=classStudents(c.id),bl=all.filter(s=>s.status==='bao-luu').length;
@@ -835,7 +958,8 @@ R.roster=()=>{
 };
 
 R.profile=()=>{
-  const s=STU[S.profile]||STUDENTS[0],c=s.cls?CL[s.cls]:null,r=attRate(s);
+  const STUDENTS=STUS();if(!STUDENTS.length)return empty('Chi nhánh này chưa có học viên.');
+  const s=(STU[S.profile]&&inB(STU[S.profile]))?STU[S.profile]:STUDENTS[0],c=s.cls?CL[s.cls]:null,r=attRate(s);
   const attended=s.att.filter(x=>x===true).length;
   const strip=c?c.sessions.map((d,i)=>`<i class="${i>=c.held||s.att[i]===null?'f':s.att[i]?'':'n'}" title="Buổi ${i+1} · ${sh(d)}"></i>`).join(''):'';
   const opts=STUDENTS.map(x=>`<option value="${x.id}" ${x.id===s.id?'selected':''}>${x.id} · ${esc(x.name)}</option>`).join('');
@@ -873,6 +997,7 @@ function taskCard(t){const late=t.status!=='done'&&D(t.due)<TODAY;
     <div><span class="epic">${esc(EPICS[t.epic]||'')}</span></div>
     <div class="t3"><span class="pts" title="Story points">${t.pts}</span><span class="due ${late?'late':''}">${late?'Trễ · ':''}${t.due.slice(0,5)}</span>${av(t.who)}</div></article>`}
 R.marketing=()=>{
+  const scopeNote=S.branch==='all'?'':`<p class="muted" style="margin:0;font-size:13px">Bảng công việc Marketing dùng chung cho toàn hệ thống, không lọc theo chi nhánh.</p>`;
   const sprint=TASKS.filter(t=>t.status!=='backlog'),tot=sprint.reduce((a,t)=>a+t.pts,0),dn=sprint.filter(t=>t.status==='done').reduce((a,t)=>a+t.pts,0);
   const left=SPRINT.days-1-TODAY_IDX;const list=filtered();
   const board=COLS.map(c=>{const ts=list.filter(t=>t.status===c.k);return `<section class="col" data-col="${c.k}"><div class="col-h"><i style="background:${c.dot}"></i>${c.l}<span class="n num">${ts.length} · ${ts.reduce((a,t)=>a+t.pts,0)} đ</span></div><div class="col-b">${ts.map(taskCard).join('')}</div></section>`}).join('');
@@ -882,7 +1007,7 @@ R.marketing=()=>{
     <div class="track"><span style="width:${w.done/wmax*100}%;background:var(--ok-dot)"></span><span style="width:${w.review/wmax*100}%;background:var(--info-dot)"></span><span style="width:${w.doing/wmax*100}%;background:var(--orange)"></span><span style="width:${w.todo/wmax*100}%;background:var(--chart-d)"></span></div><b class="num">${w.todo+w.doing+w.review+w.done}</b></div>`).join('');
   const byType=TYPES.map(ty=>({ty,n:sprint.filter(t=>t.type===ty).reduce((a,t)=>a+t.pts,0)}));
   const late=TASKS.filter(t=>t.status!=='done'&&t.status!=='backlog'&&D(t.due)<TODAY).length;
-  return `
+  return `${scopeNote}
   <div class="card"><div class="sprint">
     <div class="meta"><span class="muted" style="font-size:12px">Sprint hiện tại</span><b>${SPRINT.name}</b><span class="muted num" style="font-size:12px">${fmt(SPRINT.start)} – ${fmt(new Date(SPRINT.start.getTime()+(SPRINT.days-1)*864e5))} · còn ${left} ngày</span></div>
     <div class="progress"><div class="lbl"><span>${esc(SPRINT.goal)}</span><span class="num"><b>${dn}/${tot}</b> điểm</span></div><div class="bar"><span style="width:${dn/tot*100}%"></span></div></div>

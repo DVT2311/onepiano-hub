@@ -4,7 +4,9 @@ Web app quản trị nội bộ của One Piano, thiết kế theo brand guide c
 
 ## Tính năng
 
-- **Tổng quan** – số liệu học viên, lớp, học phí, chuyên cần; biểu đồ theo tình trạng và đăng ký theo tháng.
+- **Bộ lọc chi nhánh** trên thanh tiêu đề – xem toàn hệ thống hoặc lọc mọi màn hình (tổng quan, lớp, học viên, điểm danh, sĩ số, hồ sơ) theo từng chi nhánh. Lựa chọn được nhớ trên trình duyệt.
+- **Tổng quan** – số liệu học viên, lớp, học phí, chuyên cần; biểu đồ theo tình trạng và đăng ký theo tháng; bảng so sánh hiệu quả 7 chi nhánh (khi xem toàn hệ thống) hoặc thông tin chi nhánh (khi đã lọc).
+- **Chi nhánh** – thẻ từng chi nhánh: quản lý, địa chỉ, học viên, lấp đầy, chuyên cần, học phí đã thu và danh sách lớp.
 - **Lớp học** – danh sách lớp, học phí, ưu đãi, giáo trình, lịch học, sĩ số.
 - **Học viên** – lọc theo 6 tình trạng (Đang học, Học thử, Bảo lưu, Quay lại, Chờ xếp lớp, Kết thúc).
 - **Điểm danh** – lưới theo buổi, bấm để đổi có mặt / vắng.
